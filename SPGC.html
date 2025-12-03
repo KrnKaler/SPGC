@@ -149,6 +149,26 @@
             transition: 0.3s;
         }
 
+        /* Chatbot Icon */
+        .chatbot-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-left: 20px;
+        }
+
+        .chatbot-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+
         @media (max-width: 768px) {
             nav {
                 padding: 15px 20px;
@@ -164,6 +184,13 @@
 
             .menu-toggle {
                 display: flex;
+            }
+
+            .chatbot-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 22px;
+                margin-left: 10px;
             }
 
             .nav-links {
@@ -736,6 +763,196 @@
             z-index: 10001;
             transition: width 0.1s;
         }
+
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: -600px;
+            right: 20px;
+            width: 380px;
+            height: 550px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            z-index: 9999;
+            transition: bottom 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-container.active {
+            bottom: 20px;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .chatbot-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb {
+            background: rgba(102, 126, 234, 0.5);
+            border-radius: 3px;
+        }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.bot {
+            background: rgba(102, 126, 234, 0.2);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chatbot-input-container {
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            border-radius: 25px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .chatbot-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .chatbot-send {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .chatbot-send:hover {
+            transform: scale(1.1);
+        }
+
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-reply-btn {
+            background: rgba(102, 126, 234, 0.3);
+            border: 1px solid rgba(102, 126, 234, 0.5);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .quick-reply-btn:hover {
+            background: rgba(102, 126, 234, 0.5);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .chatbot-container {
+                width: calc(100% - 40px);
+                max-width: 380px;
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chatbot-container {
+                width: calc(100% - 20px);
+                right: 10px;
+                height: 450px;
+            }
+
+            .chatbot-container.active {
+                bottom: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -751,10 +968,13 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="logo">🎓 Suratgarh PG College</div>
-        <div class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div style="display: flex; align-items: center;">
+            <div class="chatbot-icon" id="chatbotIcon" title="Chat with us">֎</div>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home">Home</a></li>
@@ -910,7 +1130,7 @@
                 <div class="stat-label">Expert Faculty</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number" data-target="120">0</div>
+                <div class="stat-number" data-target="15">0</div>
                 <div class="stat-label">Company Partners</div>
             </div>
         </div>
@@ -946,15 +1166,38 @@
     <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="#" title="Facebook">📘</a>
-                <a href="#" title="Twitter">🐦</a>
-                <a href="#" title="LinkedIn">💼</a>
-                <a href="#" title="Instagram">📷</a>
+<a href="https://www.facebook.com/SuratgarhPGCollege" title="Facebook">📘</a>
+<a href="https://twitter.com/SuratgarhPGCollege" title="Twitter">🐦</a>
+<a href="https://www.instagram.com/suratgarhpgcollegesog" title="Instagram">📷</a>
             </div>
             <p>&copy; 2024 Suratgarh PG College - Computer Science Department. All Rights Reserved.</p>
-            <p>Designed and Developed with ❤️ by Karandeep Singh</p>
+            <p>Designed and Developed by Karandeep Singh BCA(III Sem.) Student</p>
         </div>
     </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3>🤖 College Assistant</h3>
+            <button class="chatbot-close" id="chatbotClose">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot">
+                Hello! 👋 Welcome to Suratgarh PG College. How can I help you today?
+            </div>
+            <div class="quick-replies">
+                <button class="quick-reply-btn" onclick="sendQuickReply('Tell me about CS department')">CS Department</button>
+                <button class="quick-reply-btn" onclick="sendQuickReply('What programs do you offer?')">Programs</button>
+                <button class="quick-reply-btn" onclick="sendQuickReply('Admission process')">Admissions</button>
+                <button class="quick-reply-btn" onclick="sendQuickReply('Contact details')">Contact</button>
+		<button class="quick-reply-btn" onclick="sendQuickReply('Tell me about Management Details')">Management Contact</button>
+            </div>
+        </div>
+        <div class="chatbot-input-container">
+            <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message...">
+            <button class="chatbot-send" id="chatbotSend">➤</button>
+        </div>
+    </div>
 
     <script>
         // Loading Screen
@@ -1110,6 +1353,98 @@
                 el.style.transform = `translateY(${scrolled * 0.5}px)`;
             });
         });
+
+        // Chatbot functionality
+        const chatbotIcon = document.getElementById('chatbotIcon');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSend = document.getElementById('chatbotSend');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+
+        // Toggle chatbot
+        chatbotIcon.addEventListener('click', () => {
+            chatbotContainer.classList.add('active');
+        });
+
+        chatbotClose.addEventListener('click', () => {
+            chatbotContainer.classList.remove('active');
+        });
+
+        // Send message function
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message === '') return;
+
+            // Add user message
+            addMessage(message, 'user');
+            chatbotInput.value = '';
+
+            // Simulate bot response
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
+            }, 500);
+        }
+
+        // Add message to chat
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        // Get bot response
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+
+            if (lowerMessage.includes('cs') || lowerMessage.includes('computer science') || lowerMessage.includes('department')) {
+                return 'Our Computer Science department offers cutting-edge programs in AI, Cyber Security, Data Science, and more! We have state-of-the-art labs and expert faculty.';
+            } else if (lowerMessage.includes('program') || lowerMessage.includes('course') || lowerMessage.includes('degree')) {
+                return 'We offer BCA, MCA, B.Sc. and M.Sc. in Computer Science, plus specialized diplomas. Each program is designed to prepare you for the tech industry!';
+            } else if (lowerMessage.includes('admission') || lowerMessage.includes('apply') || lowerMessage.includes('enroll')) {
+                return 'Admissions are open! Please contact us at 9772215703 or fill out the contact form below. Our team will guide you through the process.';
+            } else if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('email')) {
+                return 'You can reach Mr. Sanjay Jain at:\n📞 9772215703\n📧 info@suratgarhpgcollege.edu\nOr use the contact form on our website!';
+            } else if (lowerMessage.includes('faculty') || lowerMessage.includes('teacher') || lowerMessage.includes('professor')) {
+                return 'Our expert faculty includes Mr. Sanjay Jain and Mr. Sardool Singh, both highly qualified professionals with years of industry experience!';
+            } else if (lowerMessage.includes('fee') || lowerMessage.includes('cost') || lowerMessage.includes('price')) {
+                return 'For detailed fee structure, please contact our admission office at 9772215703. We also offer scholarships for deserving students!';
+            } else if (lowerMessage.includes('placement') || lowerMessage.includes('job') || lowerMessage.includes('career')) {
+                return 'We have an excellent placement record of 95%! Our students are placed in top tech companies. We have partnerships with over 120 companies.';
+            } else if (lowerMessage.includes('lab') || lowerMessage.includes('facilities') || lowerMessage.includes('infrastructure')) {
+                return 'We have advanced computer labs, digital library, research centers, high-speed internet, and an innovation hub for startups!';
+            } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return 'Hello! 👋 How can I assist you today? Feel free to ask about our programs, admissions, or facilities!';
+            } else if (lowerMessage.includes('thank')) {
+                return 'You\'re welcome! 😊 Feel free to ask if you have any more questions!';
+            } else if (lowerMessage.includes('management')) {
+                return 'You can reach principal at:\n📞 9610096626\n📧 suratgarhpgcollege@gmail.com\nOr use the contact form on our website!';
+            } else {
+                return 'I\'m here to help! You can ask me about our CS programs, admissions, faculty, facilities, or placements. How can I assist you?';
+            }
+        }
+
+        // Send message on button click
+        chatbotSend.addEventListener('click', sendMessage);
+
+        // Send message on Enter key
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Quick reply function
+        function sendQuickReply(message) {
+            addMessage(message, 'user');
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
+            }, 500);
+        }
     </script>
 </body>
 </html>
